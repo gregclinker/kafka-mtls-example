@@ -1,0 +1,39 @@
+version: '3.5'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.1.1
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:7.1.1
+    hostname: kafka
+    container_name: kafka
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_LISTENERS: EXTERNAL_SSL://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: EXTERNAL_SSL://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: EXTERNAL_SSL:SSL
+      KAFKA_INTER_BROKER_LISTENER_NAME: EXTERNAL_SSL
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+      KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_SECURITY_PROTOCOL: SSL
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.keystore.jks
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka.keystore.creds
+      KAFKA_SSL_KEY_CREDENTIALS: kafka.keystore.creds
+      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: kafka.truststore.creds
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+    depends_on:
+      - zookeeper
+    volumes:
+      - ./secrets:/etc/kafka/secrets
