@@ -1,4 +1,4 @@
-# Kafka mTLS Example
+# Kafka mTLS with ACL Example
 
 ## References
 
