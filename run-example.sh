@@ -18,6 +18,6 @@ echo "/opensource/kafka_2.13-3.1.0/bin/kafka-topics.sh --bootstrap-server=localh
 /opensource/kafka_2.13-3.1.0/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --create --if-not-exists --topic test-topic --partitions 1 --replication-factor 1
 
 #
-echo "/opensource/kafka_2.13-3.1.0/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe"
+#echo "/opensource/kafka_2.13-3.1.0/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe"
 #
-/opensource/kafka_2.13-3.1.0/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe
+#/opensource/kafka_2.13-3.1.0/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe
