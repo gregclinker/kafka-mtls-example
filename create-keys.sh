@@ -24,5 +24,14 @@ keytool -keystore kafka.keystore.jks -storepass changeit -alias CARoot -import -
 keytool -keystore kafka.keystore.jks -storepass changeit -alias localhost -import -file kafka.signed.crt -noprompt
 rm kafka.unsigned.crt kafka.signed.crt root.srl
 
+# create keystore, export the cert, sign it, import root CA, import broker certificate
+echo "create server keystore and sign"
+keytool -keystore kafka.keystore1.jks -storepass changeit -alias localhost1 -validity 365 -genkey -keyalg RSA -ext SAN=DNS:kafka.essexboy.com -dname "CN=Essexboy1"
+keytool -keystore kafka.keystore1.jks -storepass changeit -alias localhost1 -certreq -file kafka.unsigned.crt
+openssl x509 -req -CA root.crt -CAkey root.key -in kafka.unsigned.crt -out kafka.signed.crt -days 365 -CAcreateserial
+keytool -keystore kafka.keystore1.jks -storepass changeit -alias CARoot -import -file root.crt -noprompt
+keytool -keystore kafka.keystore1.jks -storepass changeit -alias localhost1 -import -file kafka.signed.crt -noprompt
+rm kafka.unsigned.crt kafka.signed.crt root.srl
+
 mv *.jks secrets
 rm *.crt *.key
