@@ -24,15 +24,17 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper
       KAFKA_BROKER_ID: 1
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
-      KAFKA_SSL_CLIENT_AUTH: required
       KAFKA_SECURITY_PROTOCOL: SSL
+      KAFKA_SSL_CLIENT_AUTH: required
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka.keystore.creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka.keystore.creds
       KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.truststore.jks
       KAFKA_SSL_TRUSTSTORE_CREDENTIALS: kafka.truststore.creds
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "false"
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_SUPER_USERS: 'User:CN=Essexboy'
     depends_on:
       - zookeeper
     volumes:
