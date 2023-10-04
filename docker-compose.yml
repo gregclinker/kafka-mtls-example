@@ -32,9 +32,9 @@ services:
       KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.server.truststore.jks
       KAFKA_SSL_TRUSTSTORE_CREDENTIALS: kafka.truststore.creds
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: " "
-      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "false"
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
-      KAFKA_SUPER_USERS: 'User:CN=Essexboy'
+      #KAFKA_SUPER_USERS: 'User:CN=Essexboy'
     depends_on:
       - zookeeper
     volumes:
