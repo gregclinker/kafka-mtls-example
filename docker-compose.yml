@@ -39,7 +39,7 @@ services:
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "false"
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
       # the principle (CN name of the key) is authorised
-      KAFKA_SUPER_USERS: 'User:CN=Essexboy1'
+      KAFKA_SUPER_USERS: 'User:CN=Essexboy1;User:CN=Essexboy2'
     depends_on:
       - zookeeper
     volumes:
