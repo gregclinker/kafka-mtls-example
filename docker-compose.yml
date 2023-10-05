@@ -28,7 +28,7 @@ services:
       # if this is not set any client will be able to bi-pass SSL authentication
       KAFKA_SSL_CLIENT_AUTH: required
       # the key in the key store must be common between the client & server
-      KAFKA_SSL_KEYSTORE_FILENAME: kafka.keystore.jks
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.server.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka.keystore.creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka.keystore.creds
       # the server truststore will allow any client truststore signed with the same root CA to authenticate against the sever truststore
@@ -39,7 +39,7 @@ services:
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "false"
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
       # the principle (CN name of the key) is authorised
-      KAFKA_SUPER_USERS: 'User:CN=Essexboy'
+      KAFKA_SUPER_USERS: 'User:CN=Essexboy1'
     depends_on:
       - zookeeper
     volumes:

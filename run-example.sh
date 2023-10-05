@@ -17,5 +17,5 @@ echo "$KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --comma
 $KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --create --if-not-exists --topic test-topic --partitions 1 --replication-factor 1
 
 #
-echo "$KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe"
-$KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe
+#echo "$KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe"
+#$KAFKA_HOME/bin/kafka-topics.sh --bootstrap-server=localhost:29092 --command-config ssl.properties --describe
