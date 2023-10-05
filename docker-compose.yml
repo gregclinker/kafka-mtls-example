@@ -27,7 +27,7 @@ services:
       KAFKA_SECURITY_PROTOCOL: SSL
       # if this is not set any client will be able to bi-pass SSL authentication
       KAFKA_SSL_CLIENT_AUTH: required
-      # the key in the key store must be common between the client & server
+      # the key in the client & server key store must be signed by the same root CA
       KAFKA_SSL_KEYSTORE_FILENAME: kafka.server.keystore.jks
       KAFKA_SSL_KEYSTORE_CREDENTIALS: kafka.keystore.creds
       KAFKA_SSL_KEY_CREDENTIALS: kafka.keystore.creds
