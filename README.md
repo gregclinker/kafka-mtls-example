@@ -45,13 +45,21 @@ openssl x509 -req -CA root.crt -CAkey root.key -in kafka.unsigned.crt -out kafka
 keytool -keystore kafka.client1.keystore.jks -storepass changeit -alias root -import -file root.crt -noprompt
 keytool -keystore kafka.client1.keystore.jks -storepass changeit -alias essexboy-client-1 -import -file kafka.signed.crt -noprompt
 
-# create client 2 keystore, export the cert, sign it, import root CA WILL NOT WORK BECAUSE IT HAS THE WRONG CN
+# create client 2 keystore, export the cert, sign it, import root
 echo "create client 2 keystore and sign"
 keytool -keystore kafka.client2.keystore.jks -storepass changeit -alias essexboy-client-2 -validity 365 -genkey -keyalg RSA -ext SAN=DNS:kafka.essexboy.com -dname "CN=Essexboy2"
 keytool -keystore kafka.client2.keystore.jks -storepass changeit -alias essexboy-client-2 -certreq -file kafka.unsigned.crt
 openssl x509 -req -CA root.crt -CAkey root.key -in kafka.unsigned.crt -out kafka.signed.crt -days 365 -CAcreateserial
 keytool -keystore kafka.client2.keystore.jks -storepass changeit -alias root -import -file root.crt -noprompt
 keytool -keystore kafka.client2.keystore.jks -storepass changeit -alias essexboy-client-2 -import -file kafka.signed.crt -noprompt
+
+# create client 3 keystore, export the cert, sign it, import root CA WILL NOT CN is not listed in super.users
+echo "create client 3 keystore and sign"
+keytool -keystore kafka.client3.keystore.jks -storepass changeit -alias essexboy-client-3 -validity 365 -genkey -keyalg RSA -ext SAN=DNS:kafka.essexboy.com -dname "CN=Essexboy3"
+keytool -keystore kafka.client3.keystore.jks -storepass changeit -alias essexboy-client-3 -certreq -file kafka.unsigned.crt
+openssl x509 -req -CA root.crt -CAkey root.key -in kafka.unsigned.crt -out kafka.signed.crt -days 365 -CAcreateserial
+keytool -keystore kafka.client3.keystore.jks -storepass changeit -alias root -import -file root.crt -noprompt
+keytool -keystore kafka.client3.keystore.jks -storepass changeit -alias essexboy-client-3 -import -file kafka.signed.crt -noprompt
 
 echo ""
 echo "server keystore"
@@ -65,6 +73,11 @@ echo ""
 echo "client 2 keystore"
 keytool -list -keystore kafka.client2.keystore.jks -storepass changeit
 
+echo ""
+echo "client 3 keystore"
+keytool -list -keystore kafka.client3.keystore.jks -storepass changeit
+
 rm kafka.unsigned.crt kafka.signed.crt root.srl root.crt root.key
 mv *.jks secrets
+
 ```
